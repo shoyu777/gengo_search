@@ -4,10 +4,15 @@ require 'csv'
 module GengoSearch
   ERAS = CSV.read('lib/data/era_names.csv')
 
-  def self.gengo
-    ERAS.each do |en|
-      puts en[0]
+  def get(year = nil)
+    if year > 0 || year <= 9999
+      puts "number"
+    else
+      @kanji = "正しい西暦を入力してください"
+      @romaji = "please set number"
     end
+    #ERAS.each do |en|
+    #  puts en["started_year"]
+    #end
   end
-
 end
