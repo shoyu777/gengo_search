@@ -2,23 +2,56 @@ require "gengo_search/version"
 require 'csv'
 
 module GengoSearch
-  attr_reader :kanji, :romaji
-  ERAS = CSV.read('lib/data/era_names.csv')
+  class Gengo
+    attr_reader :kanji, :romaji, :hiragana, :year
+    ERAS = CSV.read('lib/data/era_names.csv')
 
-  def self.gengo(year = nil, type = "kanji")
-    if year.nil? then
-      puts "please set a correct number(645~9999)"
-    elsif year < 645 || year > 9999 then
-      puts "please set a correct number(645~9999)"
-    else
-      if type == "kanji" then
-        puts "漢字"
+    def initialize(ad_year = nil)
+      if ad_year.nil? || !(ad_year.is_a?(Integer)) || ad_year < 645 || ad_year > 9999 then
+        raise ArgumentError, "Please set a correct number(645~9999)"
       else
-        puts year.to_s
+        started_year_index = search(ad_year)
+        setTargetEra(started_year_index, ad_year)
       end
     end
-    #ERAS.each do |en|
-    #  puts en["started_year"]
-    #end
+
+    def show
+      ERAS
+    end
+
+    #Using Binary Search
+    def search(target = 0)
+
+      head = 0
+      tail = ERAS.count - 1
+
+      if ERAS[tail][0].to_i <= target then
+        return tail
+      else
+        while head <= tail
+
+          center = (head + tail) / 2
+          puts center.to_s
+  
+          if ERAS[center][0].to_i <= target && target < ERAS[center + 1][0].to_i then
+            return center
+          elsif ERAS[center + 1][0].to_i < target
+            head = center + 1
+          else
+            tail = center - 1
+          end
+        end
+      end
+
+
+    end
+
+    def setTargetEra(started_year_index = 0, ad_year = 0)
+      year = ad_year - ERAS[started_year_index][0].to_i + 1
+      @kanji = "#{ERAS[started_year_index][1]} #{year}年"
+      @romaji = "#{ERAS[started_year_index][2]} #{year}nen"
+      @hiragana = "#{ERAS[started_year_index][3]} #{year}ねん"
+    end
+
   end
 end
