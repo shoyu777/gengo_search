@@ -1,8 +1,6 @@
 # GengoSearch
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/gengo_search`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+GengoSearch is a gem to convert Anno Domini year like 1989 to Japanese era name like HEISEI, MEIJI and so on.
 
 ## Installation
 
@@ -22,7 +20,17 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Set year(YYYY) you want to convert when create new instance.
+Do note that First Japanese era starts from 645. So if you choose less than 645, it returns ArgumentError.
+
+Once an instance created, you can get Japanese era name by Kanji, Romaji, or Hiragana as below.
+
+```ruby
+gengo = GengoSearch::Gengo.new(1900)
+gengo.kanji      #=> "明治 33年"
+gengo.romaji     #=> "MEIJI 33NEN"
+gengo.hiragana   #=> "めいじ 33ねん"
+```
 
 ## Development
 
