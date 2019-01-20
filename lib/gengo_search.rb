@@ -34,7 +34,7 @@ module GengoSearch
   
           if ERAS[center][0].to_i <= target && target < ERAS[center + 1][0].to_i then
             return center
-          elsif ERAS[center + 1][0].to_i < target
+          elsif ERAS[center][0].to_i < target
             head = center + 1
           else
             tail = center - 1
