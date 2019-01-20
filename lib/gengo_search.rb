@@ -31,7 +31,6 @@ module GengoSearch
         while head <= tail
 
           center = (head + tail) / 2
-          puts center.to_s
   
           if ERAS[center][0].to_i <= target && target < ERAS[center + 1][0].to_i then
             return center
@@ -48,9 +47,15 @@ module GengoSearch
 
     def setTargetEra(started_year_index = 0, ad_year = 0)
       year = ad_year - ERAS[started_year_index][0].to_i + 1
-      @kanji = "#{ERAS[started_year_index][1]} #{year}年"
-      @romaji = "#{ERAS[started_year_index][2]} #{year}nen"
-      @hiragana = "#{ERAS[started_year_index][3]} #{year}ねん"
+      if year == 1 then
+        @kanji = "#{ERAS[started_year_index][1]} 元年"
+        @hiragana = "#{ERAS[started_year_index][3]} がんねん"
+        @romaji = "#{ERAS[started_year_index][2]} GANNEN"
+      else
+        @kanji = "#{ERAS[started_year_index][1]} #{year}年"
+        @romaji = "#{ERAS[started_year_index][2]} #{year}NEN"
+        @hiragana = "#{ERAS[started_year_index][3]} #{year}ねん"
+      end
     end
 
   end
