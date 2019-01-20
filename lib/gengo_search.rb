@@ -4,7 +4,8 @@ require 'csv'
 module GengoSearch
   class Gengo
     attr_reader :kanji, :romaji, :hiragana, :year
-    ERAS = CSV.read('lib/data/era_names.csv')
+    
+    ERAS = CSV.read(File.expand_path('../data/era_names.csv', __FILE__))
 
     def initialize(ad_year = nil)
       if ad_year.nil? || !(ad_year.is_a?(Integer)) || ad_year < 645 || ad_year > 9999 then
