@@ -15,10 +15,6 @@ module GengoSearch
       end
     end
 
-    def show
-      ERAS
-    end
-
     #Using Binary Search
     def search(target = 0)
 
