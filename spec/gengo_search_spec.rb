@@ -24,6 +24,16 @@ RSpec.describe GengoSearch do
       expect(keioGannen.hiragana).to eq(hiraganaResult)
     end
 
+    it "New Gengo Reiwa" do
+      reiwaGannen = GengoSearch::Gengo.new(2019)
+      kanjiResult = "令和 元年"
+      romajiResult = "REIWA GANNEN"
+      hiraganaResult = "れいわ がんねん"
+      expect(reiwaGannen.kanji).to eq(kanjiResult)
+      expect(reiwaGannen.romaji).to eq(romajiResult)
+      expect(reiwaGannen.hiragana).to eq(hiraganaResult)
+    end
+
 
   end
 
